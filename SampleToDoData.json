@@ -2,7 +2,7 @@
     {
         "id": 1,
         "title": "ToDo One",
-        "isCompleted": false
+        "isCompleted": true
     },
     {
         "id": 2,
