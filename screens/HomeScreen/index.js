@@ -1,17 +1,22 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, StyleSheet } from "react-native";
 import AddTodo from "./components/AddTodo";
+import ToDoList from "./components/ToDoList";
 
 const HomeScreen = ({ navigation }) => {
     return (
-        <View>
-            <Text>Home</Text>
+        <SafeAreaView style={styles.container}>
+            <ToDoList />
 
             <AddTodo navigation={navigation} />
-        </View>
+        </SafeAreaView>
     );
 };
 
 export default HomeScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    container: {
+        height: "100%",
+    },
+});

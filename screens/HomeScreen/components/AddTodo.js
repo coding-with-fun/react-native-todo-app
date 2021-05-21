@@ -1,17 +1,14 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Button } from "react-native-paper";
 
 const AddTodo = ({ navigation }) => {
-    console.log(navigation);
-
     return (
-        <View>
-            <Text>Add New ToDo</Text>
-
+        <View style={styles.container}>
             <Button
                 mode="contained"
                 onPress={() => navigation.navigate("Add ToDo")}
+                style={styles.addToDoButton}
             >
                 Add New ToDo
             </Button>
@@ -21,4 +18,10 @@ const AddTodo = ({ navigation }) => {
 
 export default AddTodo;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    container: {
+        marginBottom: 10,
+        alignItems: "center",
+    },
+    addToDoButton: {},
+});
