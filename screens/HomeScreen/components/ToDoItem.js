@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text } from "react-native";
-import { List, TouchableRipple } from "react-native-paper";
+import { TouchableRipple } from "react-native-paper";
 
 const ToDoItem = ({ title, isCompleted }) => {
     return (
@@ -19,7 +19,7 @@ export default ToDoItem;
 
 const styles = StyleSheet.create({
     item: {
-        marginVertical: 20,
+        marginVertical: 10,
         padding: 5,
     },
     completedToDo: {
