@@ -70,6 +70,18 @@ const HomeScreen = ({ navigation }) => {
         }
     };
 
+    const deleteToDo = (item, flag) => {
+        // Flag = 0 => Not Completed
+        // Flag = 1 => Completed
+
+        const LocalToDoListData = [...ToDoListData];
+        const itemIndex = lodash.findIndex(LocalToDoListData[flag].data, item);
+
+        LocalToDoListData[flag].data.splice(itemIndex, 1);
+
+        setToDoListData(LocalToDoListData);
+    };
+
     return (
         <SafeAreaView style={styles.container}>
             {fetchingToDoData ? (
@@ -84,6 +96,7 @@ const HomeScreen = ({ navigation }) => {
                         ToDoList={ToDoListData}
                         handleCompleteToDo={completeToDo}
                         handleIncompleteToDo={incompleteToDo}
+                        handleDeleteToDo={deleteToDo}
                     />
                     <AddTodo navigation={navigation} />
                 </Fragment>
