@@ -2,14 +2,19 @@ import React from "react";
 import { StyleSheet, Text } from "react-native";
 import { TouchableRipple } from "react-native-paper";
 
-const ToDoItem = ({ title, isCompleted }) => {
+const ToDoItem = ({ item, handleCompleteToDo, handleIncompleteToDo }) => {
+    console.log(item);
     return (
         <TouchableRipple
-            onPress={() => console.log("Pressed")}
+            onPress={() =>
+                item.completed
+                    ? handleIncompleteToDo(item)
+                    : handleCompleteToDo(item)
+            }
             rippleColor="rgba(0, 0, 0, .1)"
         >
-            <Text style={[styles.item, isCompleted && styles.completedToDo]}>
-                {title}
+            <Text style={[styles.item, item.completed && styles.completedToDo]}>
+                {item.title}
             </Text>
         </TouchableRipple>
     );

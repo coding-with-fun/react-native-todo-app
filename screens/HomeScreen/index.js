@@ -16,10 +16,9 @@ const HomeScreen = ({ navigation }) => {
 
     const fetchData = async () => {
         setFetchingToDoData(true);
-        let response = await fetchToDos();
-        response = lodash.slice(response, 0, 20);
+        const response = await fetchToDos();
 
-        let todoItemsCopy = [
+        const todoItemsCopy = [
             {
                 title: "Not Completed",
                 data: [],
@@ -43,8 +42,32 @@ const HomeScreen = ({ navigation }) => {
 
     const completeToDo = (item) => {
         const LocalToDoListData = [...ToDoListData];
+        const itemIndex = lodash.findIndex(LocalToDoListData[0].data, item);
 
-        LocalToDoListData[1].data.push(item);
+        if (itemIndex > -1) {
+            let localItem = { ...item };
+            localItem.completed = true;
+
+            LocalToDoListData[1].data.push(localItem);
+            LocalToDoListData[0].data.splice(itemIndex, 1);
+
+            setToDoListData(LocalToDoListData);
+        }
+    };
+
+    const incompleteToDo = (item) => {
+        const LocalToDoListData = [...ToDoListData];
+        const itemIndex = lodash.findIndex(LocalToDoListData[1].data, item);
+
+        if (itemIndex > -1) {
+            let localItem = { ...item };
+            localItem.completed = false;
+
+            LocalToDoListData[0].data.push(localItem);
+            LocalToDoListData[1].data.splice(itemIndex, 1);
+
+            setToDoListData(LocalToDoListData);
+        }
     };
 
     return (
@@ -57,7 +80,11 @@ const HomeScreen = ({ navigation }) => {
                 />
             ) : (
                 <Fragment>
-                    <ToDoList ToDoList={ToDoListData} />
+                    <ToDoList
+                        ToDoList={ToDoListData}
+                        handleCompleteToDo={completeToDo}
+                        handleIncompleteToDo={incompleteToDo}
+                    />
                     <AddTodo navigation={navigation} />
                 </Fragment>
             )}

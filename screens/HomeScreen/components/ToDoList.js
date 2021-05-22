@@ -2,9 +2,13 @@ import React from "react";
 import { SectionList, StyleSheet, Text, View } from "react-native";
 import ToDoItem from "./ToDoItem";
 
-const ToDoList = ({ ToDoList }) => {
+const ToDoList = ({ ToDoList, handleCompleteToDo, handleIncompleteToDo }) => {
     const renderItem = ({ item }) => (
-        <ToDoItem title={item.title} isCompleted={item.completed} />
+        <ToDoItem
+            item={item}
+            handleCompleteToDo={handleCompleteToDo}
+            handleIncompleteToDo={handleIncompleteToDo}
+        />
     );
 
     const ItemSeparator = () => (
