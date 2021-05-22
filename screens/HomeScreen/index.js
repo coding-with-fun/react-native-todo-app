@@ -1,45 +1,16 @@
 import lodash from "lodash";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment } from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
-import { fetchToDos } from "../../api/FetchToDoData";
 import AddTodo from "./components/AddTodo";
 import ToDoList from "./components/ToDoList";
 
-const HomeScreen = ({ navigation }) => {
-    const [fetchingToDoData, setFetchingToDoData] = useState(true);
-    const [ToDoListData, setToDoListData] = useState();
-
-    useEffect(() => {
-        fetchData();
-    }, []);
-
-    const fetchData = async () => {
-        setFetchingToDoData(true);
-        const response = await fetchToDos();
-
-        const todoItemsCopy = [
-            {
-                title: "Not Completed",
-                data: [],
-            },
-            {
-                title: "Completed",
-                data: [],
-            },
-        ];
-        response.map((todo) => {
-            if (todo.completed) {
-                todoItemsCopy[1].data.push(todo);
-            } else {
-                todoItemsCopy[0].data.push(todo);
-            }
-        });
-
-        setToDoListData(todoItemsCopy);
-        setFetchingToDoData(false);
-    };
-
+const HomeScreen = ({
+    navigation,
+    fetchingToDoData,
+    ToDoListData,
+    setToDoListData,
+}) => {
     const completeToDo = (item) => {
         const LocalToDoListData = [...ToDoListData];
         const itemIndex = lodash.findIndex(LocalToDoListData[0].data, item);
