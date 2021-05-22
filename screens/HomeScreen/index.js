@@ -41,6 +41,12 @@ const HomeScreen = ({ navigation }) => {
         setFetchingToDoData(false);
     };
 
+    const completeToDo = (item) => {
+        const LocalToDoListData = [...ToDoListData];
+
+        LocalToDoListData[1].data.push(item);
+    };
+
     return (
         <SafeAreaView style={styles.container}>
             {fetchingToDoData ? (
