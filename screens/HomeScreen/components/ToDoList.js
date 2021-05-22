@@ -1,18 +1,10 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import { FlatList, StyleSheet, View } from "react-native";
-import data from "../../../SampleToDoData.json";
+import React from "react";
+import { SectionList, StyleSheet, Text, View } from "react-native";
 import ToDoItem from "./ToDoItem";
 
-const ToDoList = () => {
-    const [ToDoList, setToDoList] = useState();
-
-    useEffect(() => {
-        setToDoList([...data]);
-    }, [data]);
-
+const ToDoList = ({ ToDoList }) => {
     const renderItem = ({ item }) => (
-        <ToDoItem title={item.title} isCompleted={item.isCompleted} />
+        <ToDoItem title={item.title} isCompleted={item.completed} />
     );
 
     const ItemSeparator = () => (
@@ -24,13 +16,18 @@ const ToDoList = () => {
         />
     );
 
+    const ListTitle = ({ section: { title } }) => (
+        <Text style={styles.listTitle}>{title}</Text>
+    );
+
     return (
-        <FlatList
-            data={ToDoList}
+        <SectionList
+            sections={ToDoList}
             renderItem={renderItem}
-            keyExtractor={(item) => item.id.toString()}
+            keyExtractor={(item) => item.id}
             style={styles.container}
             ItemSeparatorComponent={ItemSeparator}
+            renderSectionHeader={ListTitle}
         />
     );
 };
@@ -39,4 +36,10 @@ export default ToDoList;
 
 const styles = StyleSheet.create({
     container: {},
+    listTitle: {
+        marginTop: 10,
+        fontSize: 17,
+        fontWeight: "bold",
+        textAlign: "center",
+    },
 });
